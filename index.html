@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        canvas {
+            border: 1px solid #000;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+    <title>Text Animation</title>
+</head>
+<body>
+    <canvas id="textCanvas" width="400" height="100"></canvas>
+
+    <script>
+        const canvas = document.getElementById('textCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const text = 'Animation on CANVAS!';
+        const fontSize = 24;
+        ctx.font = `${fontSize}px Arial`;
+
+        let xPos = 0;
+
+        function draw() {
+            // Очищаем канвас
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Рисуем текст
+            ctx.fillText(text, xPos, 50);
+
+            // Увеличиваем позицию X для анимации
+            xPos += 2;
+
+            // Повторяем анимацию
+            if (xPos > canvas.width) {
+                xPos = -ctx.measureText(text).width;
+            }
+
+            // Запускаем функцию анимации повторно
+            requestAnimationFrame(draw);
+        }
+
+        // Запускаем анимацию
+        draw();
+    </script>
+</body>
+</html>
